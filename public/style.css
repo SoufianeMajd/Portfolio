@@ -1655,7 +1655,7 @@ body:hover .cursor-glow {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -300px;
         left: auto;
         transform: none;
         width: 280px;
@@ -1675,6 +1675,8 @@ body:hover .cursor-glow {
 
     .nav-toggle {
         display: flex;
+        z-index: 2000;
+        position: relative;
     }
 
     .hero {
