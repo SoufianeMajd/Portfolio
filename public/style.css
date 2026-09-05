@@ -1656,6 +1656,8 @@ body:hover .cursor-glow {
         position: fixed;
         top: 0;
         right: -100%;
+        left: auto;
+        transform: none;
         width: 280px;
         height: 100vh;
         flex-direction: column;
