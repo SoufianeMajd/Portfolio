@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Messages Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: rgba(17, 17, 24, 0.7);
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --text: #e8e8ef;
+            --text-sec: #8b8b9e;
+            --text-muted: #55556a;
+            --accent: #6c5ce7;
+            --accent2: #00cec9;
+            --gradient: linear-gradient(135deg, #6c5ce7, #00cec9);
+            --danger: #fd79a8;
+            --radius: 12px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .admin-header {
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,15,0.85);
+        }
+
+        .admin-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-header h1 i {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .back-link {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-sec);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            padding: 24px 40px;
+        }
+
+        .stat-card {
+            flex: 1;
+            padding: 20px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .stat-icon.unread {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        .messages-container {
+            padding: 0 40px 40px;
+        }
+
+        .messages-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-card {
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .message-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .message-card:hover::before {
+            opacity: 1;
+        }
+
+        .message-card.unread {
+            border-left: 3px solid var(--accent);
+        }
+
+        .message-card.unread::before {
+            opacity: 1;
+        }
+
+        .msg-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .msg-sender {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .msg-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .msg-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .msg-email {
+            font-size: 0.8rem;
+            color: var(--accent2);
+        }
+
+        .msg-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .msg-body {
+            font-size: 0.9rem;
+            color: var(--text-sec);
+            line-height: 1.7;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .msg-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .msg-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-sec);
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+
+        .msg-btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .msg-btn.delete:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .empty-state h3 {
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            margin-bottom: 8px;
+        }
+
+        .refresh-btn {
+            padding: 8px 20px;
+            background: var(--gradient);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(108,92,231,0.3);
+        }
+
+        .unread-badge {
+            background: var(--danger);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .stats-bar { flex-direction: column; padding: 16px 20px; }
+            .messages-container { padding: 0 20px 20px; }
+            .admin-header { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1><i class="fas fa-envelope-open-text"></i> Messages Dashboard</h1>
+        <div class="header-actions">
+            <button class="refresh-btn" onclick="loadMessages()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+                <div class="stat-value" id="totalCount">0</div>
+                <div class="stat-label">Total Messages</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon unread"><i class="fas fa-bell"></i></div>
+            <div>
+                <div class="stat-value" id="unreadCount">0</div>
+                <div class="stat-label">Unread</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="messages-container">
+        <div class="messages-title">
+            <i class="fas fa-inbox"></i> All Messages
+        </div>
+        <div id="messagesList"></div>
+    </div>
+
+    <script>
+        const API = '/api/messages';
+
+        async function loadMessages() {
+            try {
+                const [msgsRes, statsRes] = await Promise.all([
+                    fetch(API),
+                    fetch(API + '/stats')
+                ]);
+                const msgsData = await msgsRes.json();
+                const statsData = await statsRes.json();
+
+                document.getElementById('totalCount').textContent = statsData.total || 0;
+                document.getElementById('unreadCount').textContent = statsData.unread || 0;
+
+                renderMessages(msgsData.messages || []);
+            } catch (err) {
+                console.error('Failed to load messages:', err);
+                document.getElementById('messagesList').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Connection Error</h3>
+                        <p>Could not connect to the server. Make sure the server is running.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderMessages(messages) {
+            const container = document.getElementById('messagesList');
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>No messages yet</h3>
+                        <p>Messages from your contact form will appear here.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = messages.map(msg => {
+                const initials = msg.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+                const date = new Date(msg.created_at).toLocaleString();
+                const unreadClass = msg.is_read ? '' : 'unread';
+
+                return `
+                    <div class="message-card ${unreadClass}" id="msg-${msg.id}">
+                        <div class="msg-header">
+                            <div class="msg-sender">
+                                <div class="msg-avatar">${initials}</div>
+                                <div>
+                                    <div class="msg-name">${escapeHtml(msg.name)} ${!msg.is_read ? '<span class="unread-badge">NEW</span>' : ''}</div>
+                                    <div class="msg-email">${escapeHtml(msg.email)}</div>
+                                </div>
+                            </div>
+                            <div class="msg-date"><i class="fas fa-clock"></i> ${date}</div>
+                        </div>
+                        <div class="msg-body">${escapeHtml(msg.message)}</div>
+                        <div class="msg-actions">
+                            ${!msg.is_read ? `<button class="msg-btn" onclick="markRead(${msg.id})"><i class="fas fa-check"></i> Mark Read</button>` : ''}
+                            <a href="mailto:${escapeHtml(msg.email)}?subject=Re: Portfolio Contact" class="msg-btn"><i class="fas fa-reply"></i> Reply</a>
+                            <button class="msg-btn delete" onclick="deleteMsg(${msg.id})"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function markRead(id) {
+            await fetch(`${API}/${id}/read`, { method: 'PATCH' });
+            loadMessages();
+        }
+
+        async function deleteMsg(id) {
+            if (!confirm('Delete this message?')) return;
+            await fetch(`${API}/${id}`, { method: 'DELETE' });
+            loadMessages();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load on page open
+        loadMessages();
+    </script>
+</body>
+</html>
