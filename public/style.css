@@ -176,9 +176,7 @@ body:hover .cursor-glow {
     display: flex;
     list-style: none;
     gap: 8px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-left: auto;
 }
 
 .nav-link {
@@ -294,13 +292,13 @@ body:hover .cursor-glow {
 
 /* ---------- Hero Section ---------- */
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 100px 24px 60px;
+    padding: 80px 24px 20px;
     overflow: hidden;
 }
 
@@ -352,11 +350,11 @@ body:hover .cursor-glow {
     font-weight: 900;
     line-height: 1.05;
     letter-spacing: -0.04em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .hero-title {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .typing-wrapper {
@@ -384,7 +382,7 @@ body:hover .cursor-glow {
     font-size: 1.05rem;
     color: var(--text-secondary);
     max-width: 520px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     line-height: 1.8;
 }
 
@@ -398,7 +396,7 @@ body:hover .cursor-glow {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 
 .btn {
@@ -463,7 +461,7 @@ body:hover .cursor-glow {
 }
 
 .stat-number {
-    display: block;
+    display: inline-block;
     font-size: 2rem;
     font-weight: 800;
     background: var(--gradient-primary);
@@ -482,11 +480,13 @@ body:hover .cursor-glow {
 }
 
 .stat-label {
+    display: block;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 500;
+    margin-top: 4px;
 }
 
 /* Profile Card */
