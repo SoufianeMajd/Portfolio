@@ -139,7 +139,7 @@
     // ---------- Typing Effect ----------
     const typingEl = document.getElementById('typingText');
     const titles = [
-        'Full-Stack Developer',
+        'Cybersecurity Engineer',
         'Network & Security Specialist',
         'Cloud Computing Enthusiast',
         'Computer Engineering Student'
