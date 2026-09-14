@@ -1647,6 +1647,10 @@ body:hover .cursor-glow {
         grid-template-columns: 1fr;
     }
 
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .profile-card {
         width: 280px;
         padding: 30px;
@@ -1694,6 +1698,10 @@ body:hover .cursor-glow {
         grid-template-columns: 1fr;
     }
 
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
     .section {
         padding: 80px 0;
     }
@@ -1715,18 +1723,16 @@ body:hover .cursor-glow {
 
 @media (max-width: 480px) {
     .hero-cta {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 8px;
-        overflow-x: auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
     }
 
     .btn {
-        width: auto;
+        width: 100%;
         justify-content: center;
-        padding: 10px 12px;
-        font-size: 0.8rem;
-        white-space: nowrap;
+        padding: 12px 16px;
+        font-size: 0.9rem;
     }
 }
