@@ -298,7 +298,7 @@ body:hover .cursor-glow {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 80px 24px 20px;
+    padding: 140px 24px 20px;
     overflow: hidden;
 }
 
@@ -395,7 +395,7 @@ body:hover .cursor-glow {
 .hero-cta {
     display: flex;
     gap: 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-bottom: 32px;
 }
 
@@ -412,6 +412,7 @@ body:hover .cursor-glow {
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -974,6 +975,7 @@ body:hover .cursor-glow {
     padding-bottom: 4px;
     margin-top: auto;
 }
+
 .exp-tech::-webkit-scrollbar {
     display: none;
 }
@@ -1564,7 +1566,7 @@ body:hover .cursor-glow {
     left: 0;
     width: 100%;
     padding: 30px 20px 20px;
-    background: linear-gradient(to top, rgba(10,10,15,0.95), transparent);
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95), transparent);
     color: #fff;
     transform: translateY(10px);
     opacity: 0;
@@ -1584,7 +1586,7 @@ body:hover .cursor-glow {
 
 .gallery-overlay p {
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1713,12 +1715,18 @@ body:hover .cursor-glow {
 
 @media (max-width: 480px) {
     .hero-cta {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
+        gap: 8px;
+        overflow-x: auto;
     }
 
     .btn {
-        width: 100%;
+        width: auto;
         justify-content: center;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        white-space: nowrap;
     }
 }
