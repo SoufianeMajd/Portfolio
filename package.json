@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Backend for Soufiane Majd portfolio contact form",
   "main": "server.js",
+  "homepage": "https://soufianemajd.github.io/Portfolio/",
   "scripts": {
     "start": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "deploy": "gh-pages -d public"
   },
   "dependencies": {
     "cors": "^2.8.5",
