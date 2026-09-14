@@ -688,19 +688,19 @@
             </div>
             <div class="contact-grid">
                 <div class="contact-cards reveal-left">
-                    <a href="mailto:so.majd@mundiapolis.ma" class="contact-card">
+                    <a href="#" class="contact-card protected-email" data-enc="c28ubWFqZEBtdW5kaWFwb2xpcy5tYQ==">
                         <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email</h4>
-                            <p>so.majd@mundiapolis.ma</p>
+                            <p class="email-text">Loading...</p>
                         </div>
                         <i class="fas fa-arrow-right contact-arrow"></i>
                     </a>
-                    <a href="tel:+212708490148" class="contact-card">
+                    <a href="#" class="contact-card protected-phone" data-enc="KzIxMjcwODQ5MDE0OA==" data-enc-text="KzIxMiA3MDggNDkwIDE0OA==">
                         <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h4>Phone</h4>
-                            <p>+212 708 490 148</p>
+                            <p class="phone-text">Loading...</p>
                         </div>
                         <i class="fas fa-arrow-right contact-arrow"></i>
                     </a>
@@ -723,6 +723,10 @@
                 </div>
                 <div class="contact-form-wrapper reveal-right">
                     <form class="contact-form" id="contactForm">
+                        <!-- Honeypot -->
+                        <div style="display: none;">
+                            <input type="text" id="botcheck" name="botcheck">
+                        </div>
                         <div class="form-group">
                             <input type="text" id="formName" placeholder=" " required>
                             <label for="formName">Your Name</label>
