@@ -39,7 +39,7 @@
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(108, 92, 231, ${this.opacity})`;
+            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity * 0.8})`;
             ctx.fill();
         }
     }
@@ -62,7 +62,7 @@
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(108, 92, 231, ${0.06 * (1 - dist / 120)})`;
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.08 * (1 - dist / 120)})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -139,10 +139,10 @@
     // ---------- Typing Effect ----------
     const typingEl = document.getElementById('typingText');
     const titles = [
-        'Cybersecurity Engineer',
-        'Network & Security Specialist',
-        'Cloud Computing Enthusiast',
-        'Computer Engineering Student'
+        'Élève-Ingénieur Cybersécurité',
+        'Sécurité Cloud & DevSecOps',
+        'Architecture Hybride & Audits CIS',
+        'Supervision AWS & Défense Réseau'
     ];
     let titleIdx = 0;
     let charIdx = 0;
@@ -204,7 +204,7 @@
                 counterObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.15 });
 
     statNumbers.forEach(el => counterObserver.observe(el));
 
