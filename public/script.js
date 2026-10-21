@@ -233,6 +233,20 @@
             const name = document.getElementById('formName').value.trim();
             const email = document.getElementById('formEmail').value.trim();
             const message = document.getElementById('formMessage').value.trim();
+            const botcheck = document.getElementById('botcheck').value.trim();
+
+            if (botcheck !== "") {
+                // Bot detected (honeypot filled) -> simulate success silently
+                btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
+                btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
+                contactForm.reset();
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 3000);
+                return;
+            }
 
             if (!name || !email || !message) return;
 
@@ -340,5 +354,24 @@
             wrapper.insertBefore(placeholder, profileImg);
         });
     }
+
+    // ---------- Contact Info Decode (Anti-Scraping) ----------
+    const decodeContact = () => {
+        const emailCard = document.querySelector('.protected-email');
+        if (emailCard) {
+            const enc = emailCard.getAttribute('data-enc');
+            const dec = atob(enc);
+            emailCard.href = 'mailto:' + dec;
+            emailCard.querySelector('.email-text').textContent = dec;
+        }
+        const phoneCard = document.querySelector('.protected-phone');
+        if (phoneCard) {
+            const enc = phoneCard.getAttribute('data-enc');
+            const encText = phoneCard.getAttribute('data-enc-text');
+            phoneCard.href = 'tel:' + atob(enc);
+            phoneCard.querySelector('.phone-text').textContent = atob(encText);
+        }
+    };
+    decodeContact();
 
 })();

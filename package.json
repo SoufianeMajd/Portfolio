@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Soufiane Majd portfolio contact form",
   "main": "server.js",
+  "homepage": "https://soufianemajd.github.io/Portfolio/",
   "scripts": {
     "start": "nodemon server.js",
     "dev": "nodemon server.js",
@@ -11,7 +12,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0",
-    "sql.js": "^1.11.0"
+    "express-rate-limit": "^8.7.0",
+    "sql.js": "^1.11.0",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.1",

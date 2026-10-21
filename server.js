@@ -8,6 +8,8 @@ const initSqlJs = require('sql.js');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss');
 
 // LiveReload Setup (Auto Refresh)
 const livereload = require('livereload');
@@ -27,9 +29,25 @@ const DB_PATH = path.join(__dirname, 'messages.db');
 
 // ---------- Middleware ----------
 app.use(connectLivereload());
-app.use(cors());
+app.use(cors({ origin: ['https://soufianemajd.github.io', 'http://localhost:3000'] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// --- Security Middleware ---
+const apiLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: { success: false, error: 'Too many requests, please try again later.' }
+});
+
+const adminAuth = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+    if (!authHeader || authHeader !== `Bearer ${ADMIN_PASSWORD}`) {
+        return res.status(401).json({ success: false, error: 'Unauthorized' });
+    }
+    next();
+};
 
 // Serve static files (index.html, style.css, script.js, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -73,8 +91,8 @@ async function initDatabase() {
 // ---------- API Routes ----------
 
 // POST /api/messages — receive a new contact message
-app.post('/api/messages', (req, res) => {
-    const { name, email, message } = req.body;
+app.post('/api/messages', apiLimiter, (req, res) => {
+    let { name, email, message } = req.body;
 
     // Validation
     if (!name || !email || !message) {
@@ -100,10 +118,15 @@ app.post('/api/messages', (req, res) => {
         });
     }
 
+    // Sanitization
+    name = xss(name.trim());
+    email = xss(email.trim());
+    message = xss(message.trim());
+
     try {
         db.run(
             'INSERT INTO messages (name, email, message) VALUES (?, ?, ?)',
-            [name.trim(), email.trim(), message.trim()]
+            [name, email, message]
         );
         saveDatabase();
 
@@ -127,7 +150,7 @@ app.post('/api/messages', (req, res) => {
 });
 
 // GET /api/messages — retrieve all messages (for admin page)
-app.get('/api/messages', (req, res) => {
+app.get('/api/messages', adminAuth, (req, res) => {
     try {
         const result = db.exec('SELECT * FROM messages ORDER BY created_at DESC');
 
@@ -149,7 +172,7 @@ app.get('/api/messages', (req, res) => {
 });
 
 // PATCH /api/messages/:id/read — mark message as read
-app.patch('/api/messages/:id/read', (req, res) => {
+app.patch('/api/messages/:id/read', adminAuth, (req, res) => {
     try {
         db.run('UPDATE messages SET is_read = 1 WHERE id = ?', [req.params.id]);
         const changes = db.getRowsModified();
@@ -166,7 +189,7 @@ app.patch('/api/messages/:id/read', (req, res) => {
 });
 
 // DELETE /api/messages/:id — delete a message
-app.delete('/api/messages/:id', (req, res) => {
+app.delete('/api/messages/:id', adminAuth, (req, res) => {
     try {
         db.run('DELETE FROM messages WHERE id = ?', [req.params.id]);
         const changes = db.getRowsModified();
@@ -183,7 +206,7 @@ app.delete('/api/messages/:id', (req, res) => {
 });
 
 // GET /api/messages/stats — get message stats
-app.get('/api/messages/stats', (req, res) => {
+app.get('/api/messages/stats', adminAuth, (req, res) => {
     try {
         const total = db.exec('SELECT COUNT(*) as count FROM messages');
         const unread = db.exec('SELECT COUNT(*) as count FROM messages WHERE is_read = 0');

@@ -176,9 +176,7 @@ body:hover .cursor-glow {
     display: flex;
     list-style: none;
     gap: 8px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-left: auto;
 }
 
 .nav-link {
@@ -299,7 +297,7 @@ body:hover .cursor-glow {
 
 /* ---------- Hero Section ---------- */
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -430,6 +428,7 @@ body:hover .cursor-glow {
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -1041,6 +1040,7 @@ body:hover .cursor-glow {
     padding-bottom: 4px;
     margin-top: auto;
 }
+
 .exp-tech::-webkit-scrollbar {
     display: none;
 }
@@ -1651,7 +1651,7 @@ body:hover .cursor-glow {
 
 .gallery-overlay p {
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1722,6 +1722,10 @@ body:hover .cursor-glow {
         grid-template-columns: 1fr;
     }
 
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .profile-card {
         width: 270px;
         padding: 18px 20px 16px;
@@ -1772,6 +1776,10 @@ body:hover .cursor-glow {
     }
 
     .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
         grid-template-columns: 1fr;
     }
 
