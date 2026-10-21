@@ -1,27 +1,27 @@
 /* ============================================
    SOUFIANE MAJD — Professional Portfolio
-   Premium Dark Theme with Glassmorphism
+   Clean & Modern Light Theme
    ============================================ */
 
 /* ---------- CSS Variables / Design Tokens ---------- */
 :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #111118;
-    --bg-card: rgba(17, 17, 24, 0.7);
-    --bg-glass: rgba(255, 255, 255, 0.03);
-    --border-glass: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-glass: rgba(241, 245, 249, 0.85);
+    --border-glass: #e2e8f0;
+    --border-hover: #cbd5e1;
 
-    --text-primary: #e8e8ef;
-    --text-secondary: #8b8b9e;
-    --text-muted: #55556a;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
 
-    --accent-1: #6c5ce7;
-    --accent-2: #00cec9;
-    --accent-3: #fd79a8;
-    --gradient-primary: linear-gradient(135deg, #6c5ce7, #00cec9);
-    --gradient-accent: linear-gradient(135deg, #6c5ce7, #fd79a8);
-    --gradient-card-hover: linear-gradient(135deg, rgba(108, 92, 231, 0.12), rgba(0, 206, 201, 0.08));
+    --accent-1: #6366f1;
+    --accent-2: #0284c7;
+    --accent-3: #ec4899;
+    --gradient-primary: linear-gradient(135deg, #6366f1, #0284c7);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #ec4899);
+    --gradient-card-hover: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(2, 132, 199, 0.03));
 
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -31,8 +31,8 @@
     --radius-lg: 20px;
     --radius-xl: 28px;
 
-    --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.15);
+    --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.05);
+    --shadow-glow: 0 10px 30px rgba(99, 102, 241, 0.12);
 
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -73,8 +73,8 @@ body {
 }
 
 ::selection {
-    background: rgba(108, 92, 231, 0.35);
-    color: #fff;
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--text-primary);
 }
 
 a {
@@ -93,7 +93,7 @@ img {
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(108, 92, 231, 0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
@@ -136,11 +136,11 @@ body:hover .cursor-glow {
 }
 
 .navbar.scrolled {
-    background: rgba(10, 10, 15, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-glass);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
 }
 
 .nav-container {
@@ -283,6 +283,11 @@ body:hover .cursor-glow {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-wrap: pretty;
+}
+
+.no-wrap {
+    white-space: nowrap;
 }
 
 .gradient-text {
@@ -300,7 +305,7 @@ body:hover .cursor-glow {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 100px 24px 60px;
+    padding: calc(var(--nav-height) + 12px) 24px 20px;
     overflow: hidden;
 }
 
@@ -308,60 +313,70 @@ body:hover .cursor-glow {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(108, 92, 231, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(108, 92, 231, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 50%, #000 35%, transparent 100%);
 }
 
 .hero-content {
     max-width: var(--container-max);
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 60px;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center; /* Vertically centered in the middle of the right side! */
+    justify-content: space-between;
+    gap: 48px;
     z-index: 1;
 }
 
-.hero-greeting {
+/* Hero Text (Left Column) */
+.hero-text {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+}
+
+.hero-greeting {
+    display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .greeting-line {
-    width: 40px;
+    width: 32px;
     height: 2px;
     background: var(--gradient-primary);
     border-radius: 2px;
 }
 
 .hero-greeting span {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--accent-2);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
 }
 
 .hero-name {
-    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-size: clamp(2.3rem, 4.2vw, 3.5rem);
     font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-    margin-bottom: 20px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
 }
 
 .hero-title {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .typing-wrapper {
     font-family: var(--font-mono);
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     color: var(--accent-1);
     display: inline-flex;
     align-items: center;
@@ -381,11 +396,11 @@ body:hover .cursor-glow {
 }
 
 .hero-description {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    max-width: 520px;
-    margin-bottom: 32px;
-    line-height: 1.8;
+    max-width: 530px;
+    margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .hero-description strong {
@@ -396,18 +411,19 @@ body:hover .cursor-glow {
 /* Buttons */
 .hero-cta {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 30px;
+    gap: 8px;
+    padding: 11px 22px;
     border-radius: var(--radius-md);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     border: none;
@@ -455,17 +471,19 @@ body:hover .cursor-glow {
 /* Hero Stats */
 .hero-stats {
     display: flex;
-    gap: 40px;
+    align-items: center;
+    gap: 36px;
 }
 
 .stat-item {
-    text-align: center;
+    text-align: left;
 }
 
 .stat-number {
-    display: block;
-    font-size: 2rem;
+    display: inline-block;
+    font-size: 1.85rem;
     font-weight: 800;
+    line-height: 1;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -473,7 +491,7 @@ body:hover .cursor-glow {
 }
 
 .stat-plus {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -482,31 +500,36 @@ body:hover .cursor-glow {
 }
 
 .stat-label {
-    font-size: 0.8rem;
+    display: block;
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-weight: 500;
+    font-weight: 600;
+    margin-top: 3px;
 }
 
-/* Profile Card */
+/* Visual Profile (Right Column — Centered Vertically in the middle) */
 .hero-visual {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .profile-card {
     position: relative;
-    width: 340px;
-    padding: 40px;
+    width: 320px;
+    padding: 28px 24px 26px;
     background: var(--bg-card);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
 }
 
 .profile-card-glow {
@@ -517,15 +540,15 @@ body:hover .cursor-glow {
     bottom: -1px;
     border-radius: var(--radius-xl);
     background: var(--gradient-primary);
-    opacity: 0.12;
+    opacity: 0.15;
     z-index: -1;
-    filter: blur(30px);
+    filter: blur(25px);
 }
 
 .profile-image-wrapper {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 155px;
+    height: 155px;
 }
 
 .profile-image {
@@ -541,15 +564,15 @@ body:hover .cursor-glow {
 
 .profile-ring {
     position: absolute;
-    inset: -10px;
+    inset: -9px;
     border-radius: 50%;
-    border: 1px solid rgba(108, 92, 231, 0.2);
+    border: 1px solid rgba(108, 92, 231, 0.25);
     animation: ringPulse 3s ease-in-out infinite;
 }
 
 .ring-2 {
-    inset: -22px;
-    border-color: rgba(0, 206, 201, 0.1);
+    inset: -20px;
+    border-color: rgba(0, 206, 201, 0.15);
     animation-delay: 1.5s;
 }
 
@@ -575,18 +598,18 @@ body:hover .cursor-glow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 20px;
+    padding: 6px 18px;
     background: rgba(0, 206, 201, 0.08);
     border: 1px solid rgba(0, 206, 201, 0.2);
     border-radius: 100px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--accent-2);
 }
 
 .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     background: var(--accent-2);
     border-radius: 50%;
     animation: dotPulse 2s ease-in-out infinite;
@@ -600,52 +623,52 @@ body:hover .cursor-glow {
     }
 
     50% {
-        box-shadow: 0 0 0 8px rgba(0, 206, 201, 0);
+        box-shadow: 0 0 0 6px rgba(0, 206, 201, 0);
     }
 }
 
 /* Floating Badges */
 .floating-badge {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     background: var(--bg-card);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    color: var(--accent-1);
+    font-size: 1.1rem;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     animation: float 4s ease-in-out infinite;
     box-shadow: var(--shadow-card);
 }
 
 .badge-1 {
-    top: 10%;
-    left: -20px;
+    top: 8px;
+    left: -22px;
     animation-delay: 0s;
     color: #61dafb;
 }
 
 .badge-2 {
-    top: 15%;
-    right: -20px;
+    top: 14px;
+    right: -22px;
     animation-delay: 1s;
     color: #3776ab;
 }
 
 .badge-3 {
-    bottom: 25%;
-    left: -30px;
+    bottom: 24px;
+    left: -26px;
     animation-delay: 2s;
     color: var(--accent-2);
 }
 
 .badge-4 {
-    bottom: 15%;
-    right: -25px;
+    bottom: 18px;
+    right: -24px;
     animation-delay: 3s;
     color: #2496ed;
 }
@@ -658,22 +681,22 @@ body:hover .cursor-glow {
     }
 
     50% {
-        transform: translateY(-12px);
+        transform: translateY(-8px);
     }
 }
 
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 32px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     color: var(--text-muted);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 500;
@@ -681,7 +704,7 @@ body:hover .cursor-glow {
 }
 
 .scroll-arrow {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 @keyframes scrollBounce {
@@ -785,18 +808,7 @@ body:hover .cursor-glow {
 
 .timeline {
     position: relative;
-    padding-left: 32px;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent-1), transparent);
-    border-radius: 2px;
+    padding-left: 36px;
 }
 
 .timeline-item {
@@ -808,39 +820,94 @@ body:hover .cursor-glow {
     margin-bottom: 0;
 }
 
-.timeline-dot {
+/* Ligne continue reliant précisément chaque point */
+.timeline-item:not(:last-child)::before {
+    content: '';
     position: absolute;
-    left: -32px;
-    top: 6px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--bg-primary);
-    border: 3px solid var(--accent-1);
+    left: -28px;
+    top: 26px;
+    height: calc(100% + 28px);
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+    opacity: 0.6;
     z-index: 1;
+    transition: var(--transition-fast);
 }
 
-.timeline-item:first-child .timeline-dot {
+.timeline-item:hover:not(:last-child)::before {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.4);
+}
+
+/* Point de timeline moderne, stylisé et parfaitement centré */
+.timeline-dot {
+    position: absolute;
+    left: -36px;
+    top: 17px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.timeline-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: var(--accent-1);
-    box-shadow: 0 0 12px rgba(108, 92, 231, 0.5);
+    transition: var(--transition-fast);
+}
+
+/* Diplôme en cours avec pulse cyan */
+.timeline-item:first-child .timeline-dot {
+    border-color: var(--accent-2);
+    box-shadow: 0 0 12px rgba(0, 206, 201, 0.5);
+}
+
+.timeline-item:first-child .timeline-dot::after {
+    background: var(--accent-2);
+    box-shadow: 0 0 6px var(--accent-2);
+}
+
+/* Interaction au survol */
+.timeline-item:hover .timeline-dot {
+    border-color: var(--accent-2);
+    transform: scale(1.18);
+    box-shadow: 0 0 14px rgba(0, 206, 201, 0.6);
+}
+
+.timeline-item:hover .timeline-dot::after {
+    background: var(--accent-2);
 }
 
 .timeline-content {
     padding: 16px 20px;
-    background: var(--bg-glass);
+    background: var(--bg-card);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-md);
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
     transition: var(--transition-fast);
+    position: relative;
 }
 
 .timeline-content:hover {
     border-color: var(--border-hover);
+    background: var(--bg-card);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.1);
+    transform: translateX(4px);
 }
 
 .timeline-date {
     display: inline-block;
     padding: 3px 10px;
-    background: rgba(108, 92, 231, 0.12);
+    background: rgba(99, 102, 241, 0.08);
     color: var(--accent-1);
     border-radius: 100px;
     font-size: 0.72rem;
@@ -1564,7 +1631,7 @@ body:hover .cursor-glow {
     left: 0;
     width: 100%;
     padding: 30px 20px 20px;
-    background: linear-gradient(to top, rgba(10,10,15,0.95), transparent);
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
     color: #fff;
     transform: translateY(10px);
     opacity: 0;
@@ -1601,7 +1668,13 @@ body:hover .cursor-glow {
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 40px;
+        gap: 24px;
+        max-width: 100%;
+    }
+
+    .hero-text {
+        align-items: center;
+        text-align: center;
     }
 
     .hero-greeting {
@@ -1619,6 +1692,10 @@ body:hover .cursor-glow {
 
     .hero-stats {
         justify-content: center;
+    }
+
+    .stat-item {
+        text-align: center;
     }
 
     .about-grid {
@@ -1646,8 +1723,13 @@ body:hover .cursor-glow {
     }
 
     .profile-card {
-        width: 280px;
-        padding: 30px;
+        width: 270px;
+        padding: 18px 20px 16px;
+    }
+
+    .profile-image-wrapper {
+        width: 125px;
+        height: 125px;
     }
 }
 
@@ -1661,12 +1743,13 @@ body:hover .cursor-glow {
         width: 280px;
         height: 100vh;
         flex-direction: column;
-        background: rgba(10, 10, 15, 0.97);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         padding: 100px 30px 40px;
         gap: 4px;
         transition: right var(--transition-smooth);
         border-left: 1px solid var(--border-glass);
+        box-shadow: -10px 0 30px rgba(15, 23, 42, 0.08);
     }
 
     .nav-links.active {
@@ -1680,12 +1763,12 @@ body:hover .cursor-glow {
     }
 
     .hero {
-        padding: 120px 24px 80px;
-        min-height: auto;
+        padding: calc(var(--nav-height) + 10px) 16px 16px;
+        min-height: 100vh;
     }
 
     .hero-name {
-        font-size: clamp(2.2rem, 10vw, 3.5rem);
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
     }
 
     .projects-grid {
@@ -1712,13 +1795,95 @@ body:hover .cursor-glow {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: calc(var(--nav-height) + 6px) 12px 14px;
+        min-height: 100vh;
+    }
+
+    .hero-content {
+        gap: 10px;
+    }
+
+    .profile-card {
+        padding: 10px 18px 12px;
+        gap: 8px;
+    }
+
+    .profile-image-wrapper {
+        width: 95px;
+        height: 95px;
+    }
+
+    .floating-badge {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    .badge-1 { top: 0px; left: -14px; }
+    .badge-2 { top: 4px; right: -14px; }
+    .badge-3 { bottom: 14px; left: -16px; }
+    .badge-4 { bottom: 10px; right: -16px; }
+
+    .status-badge {
+        padding: 4px 12px;
+        font-size: 0.72rem;
+    }
+
+    .hero-greeting {
+        margin-bottom: 2px;
+    }
+
+    .greeting-line {
+        width: 18px;
+    }
+
+    .hero-greeting span {
+        font-size: 0.75rem;
+    }
+
+    .hero-name {
+        font-size: 1.7rem;
+        margin-bottom: 2px;
+    }
+
+    .hero-title {
+        margin-bottom: 4px;
+    }
+
+    .typing-wrapper {
+        font-size: 0.85rem;
+    }
+
+    .hero-description {
+        font-size: 0.82rem;
+        line-height: 1.45;
+        margin-bottom: 10px;
+    }
+
     .hero-cta {
-        flex-direction: column;
-        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
     }
 
     .btn {
-        width: 100%;
-        justify-content: center;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .hero-stats {
+        gap: 16px;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .stat-plus {
+        font-size: 1rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
     }
 }

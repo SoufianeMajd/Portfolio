@@ -1,7 +1,10 @@
 node_modules/
 messages.db
 .env
-.env.example    
-.gitignore
-
+.env.example
+*.docx
+*.db
+/*.pdf
+/public/*.pdf
+!/public/cv.pdf
 
