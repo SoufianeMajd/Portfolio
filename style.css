@@ -1329,6 +1329,10 @@ body:hover .cursor-glow {
     color: var(--accent-2);
 }
 
+.cert-date.in-progress {
+    color: #d97706;
+}
+
 .cert-date i {
     font-size: 0.7rem;
 }
