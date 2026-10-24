@@ -139,7 +139,7 @@
     // ---------- Typing Effect ----------
     const typingEl = document.getElementById('typingText');
     const titles = [
-        'Élève-Ingénieur Cybersécurité',
+        'Élève-Ingénieur en Cybersécurité',
         'Sécurité Cloud & DevSecOps',
         'Architecture Hybride & Audits CIS',
         'Supervision AWS & Défense Réseau'
@@ -237,7 +237,7 @@
 
             if (botcheck !== "") {
                 // Bot detected (honeypot filled) -> simulate success silently
-                btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
+                btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
                 btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
                 contactForm.reset();
                 setTimeout(() => {
@@ -251,7 +251,7 @@
             if (!name || !email || !message) return;
 
             // Show loading state
-            btn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+            btn.innerHTML = '<span>Envoi en cours...</span> <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             try {
@@ -271,15 +271,15 @@
                 const data = await res.json();
 
                 if (res.status === 200) {
-                    btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
+                    btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
                     btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
                     contactForm.reset();
                 } else {
-                    btn.innerHTML = '<span>Error — Try Again</span> <i class="fas fa-times"></i>';
+                    btn.innerHTML = '<span>Erreur — Réessayer</span> <i class="fas fa-times"></i>';
                     btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
                 }
             } catch (err) {
-                btn.innerHTML = '<span>Error — Try Again</span> <i class="fas fa-times"></i>';
+                btn.innerHTML = '<span>Erreur — Réessayer</span> <i class="fas fa-times"></i>';
                 btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
             }
 
