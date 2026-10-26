@@ -736,10 +736,16 @@
 
     <!-- ================= JAVASCRIPT ================= -->
     <script>
-        const API_MESSAGES = '/api/messages';
-        const API_LOGIN = '/api/admin/login';
-        const API_LOGOUT = '/api/admin/logout';
-        const API_VERIFY = '/api/admin/verify';
+        // Détection automatique du backend (support de Live Server sur le port 5500 ou fichier local)
+        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const BACKEND_URL = (window.location.protocol === 'file:' || (isLocalHost && window.location.port !== '3000'))
+            ? 'http://localhost:3000'
+            : '';
+
+        const API_MESSAGES = `${BACKEND_URL}/api/messages`;
+        const API_LOGIN = `${BACKEND_URL}/api/admin/login`;
+        const API_LOGOUT = `${BACKEND_URL}/api/admin/logout`;
+        const API_VERIFY = `${BACKEND_URL}/api/admin/verify`;
 
         const TOKEN_KEY = 'portfolio_admin_token';
 
@@ -850,7 +856,11 @@
                     document.getElementById('adminPassword').focus();
                 }
             } catch (err) {
-                showAuthError('Impossible de joindre le serveur. Assurez-vous que le serveur Node.js est démarré.');
+                if (window.location.hostname.includes('github.io')) {
+                    showAuthError('GitHub Pages est un hébergement statique sans backend. Pour consulter la base locale, lancez "npm start" et ouvrez http://localhost:3000/admin.html');
+                } else {
+                    showAuthError('Impossible de joindre le serveur. Assurez-vous que le serveur Node.js est démarré sur http://localhost:3000');
+                }
             } finally {
                 btn.disabled = false;
                 btnText.textContent = 'Se connecter';

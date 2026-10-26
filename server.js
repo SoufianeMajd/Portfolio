@@ -39,7 +39,15 @@ app.use((req, res, next) => {
 });
 
 app.use(connectLivereload());
-app.use(cors({ origin: ['https://soufianemajd.github.io', 'http://localhost:3000'] }));
+app.use(cors({ 
+    origin: [
+        'https://soufianemajd.github.io', 
+        'http://localhost:3000', 
+        'http://127.0.0.1:3000',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500'
+    ] 
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
