@@ -39,7 +39,7 @@
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity * 0.8})`;
+            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity * 0.7})`;
             ctx.fill();
         }
     }
@@ -139,10 +139,10 @@
     // ---------- Typing Effect ----------
     const typingEl = document.getElementById('typingText');
     const titles = [
-        'Élève-Ingénieur en Cybersécurité',
-        'Sécurité Cloud & DevSecOps',
-        'Architecture Hybride & Audits CIS',
-        'Supervision AWS & Défense Réseau'
+        'Élève-Ingénieur Cybersécurité',
+        'Sécurité Cloud & Architectures Hybrides',
+        'Spécialiste Réseaux & SIEM / SOC',
+        'Étudiant en Ingénierie Informatique'
     ];
     let titleIdx = 0;
     let charIdx = 0;
@@ -204,7 +204,7 @@
                 counterObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.5 });
 
     statNumbers.forEach(el => counterObserver.observe(el));
 
@@ -238,7 +238,7 @@
             if (botcheck !== "") {
                 // Bot detected (honeypot filled) -> simulate success silently
                 btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
-                btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
+                btn.style.background = 'linear-gradient(135deg, #0284c7, #00b894)';
                 contactForm.reset();
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
@@ -272,15 +272,15 @@
 
                 if (res.status === 200) {
                     btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
-                    btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
+                    btn.style.background = 'linear-gradient(135deg, #0284c7, #00b894)';
                     contactForm.reset();
                 } else {
-                    btn.innerHTML = '<span>Erreur — Réessayer</span> <i class="fas fa-times"></i>';
-                    btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
+                    btn.innerHTML = '<span>Erreur — Veuillez réessayer</span> <i class="fas fa-times"></i>';
+                    btn.style.background = 'linear-gradient(135deg, #ec4899, #db2777)';
                 }
             } catch (err) {
-                btn.innerHTML = '<span>Erreur — Réessayer</span> <i class="fas fa-times"></i>';
-                btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
+                btn.innerHTML = '<span>Erreur — Veuillez réessayer</span> <i class="fas fa-times"></i>';
+                btn.style.background = 'linear-gradient(135deg, #ec4899, #db2777)';
             }
 
             setTimeout(() => {
