@@ -39,7 +39,7 @@
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(108, 92, 231, ${this.opacity})`;
+            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity * 0.7})`;
             ctx.fill();
         }
     }
@@ -62,7 +62,7 @@
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(108, 92, 231, ${0.06 * (1 - dist / 120)})`;
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.08 * (1 - dist / 120)})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -139,10 +139,10 @@
     // ---------- Typing Effect ----------
     const typingEl = document.getElementById('typingText');
     const titles = [
-        'Cybersecurity Engineer',
-        'Network & Security Specialist',
-        'Cloud Computing Enthusiast',
-        'Computer Engineering Student'
+        'Élève-Ingénieur Cybersécurité',
+        'Sécurité Cloud & Architectures Hybrides',
+        'Spécialiste Réseaux & SIEM / SOC',
+        'Étudiant en Ingénierie Informatique'
     ];
     let titleIdx = 0;
     let charIdx = 0;
@@ -237,8 +237,8 @@
 
             if (botcheck !== "") {
                 // Bot detected (honeypot filled) -> simulate success silently
-                btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
-                btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
+                btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
+                btn.style.background = 'linear-gradient(135deg, #0284c7, #00b894)';
                 contactForm.reset();
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
@@ -251,7 +251,7 @@
             if (!name || !email || !message) return;
 
             // Show loading state
-            btn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+            btn.innerHTML = '<span>Envoi en cours...</span> <i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             try {
@@ -271,16 +271,16 @@
                 const data = await res.json();
 
                 if (res.status === 200) {
-                    btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
-                    btn.style.background = 'linear-gradient(135deg, #00cec9, #00b894)';
+                    btn.innerHTML = '<span>Message envoyé !</span> <i class="fas fa-check"></i>';
+                    btn.style.background = 'linear-gradient(135deg, #0284c7, #00b894)';
                     contactForm.reset();
                 } else {
-                    btn.innerHTML = '<span>Error — Try Again</span> <i class="fas fa-times"></i>';
-                    btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
+                    btn.innerHTML = '<span>Erreur — Veuillez réessayer</span> <i class="fas fa-times"></i>';
+                    btn.style.background = 'linear-gradient(135deg, #ec4899, #db2777)';
                 }
             } catch (err) {
-                btn.innerHTML = '<span>Error — Try Again</span> <i class="fas fa-times"></i>';
-                btn.style.background = 'linear-gradient(135deg, #fd79a8, #e84393)';
+                btn.innerHTML = '<span>Erreur — Veuillez réessayer</span> <i class="fas fa-times"></i>';
+                btn.style.background = 'linear-gradient(135deg, #ec4899, #db2777)';
             }
 
             setTimeout(() => {
